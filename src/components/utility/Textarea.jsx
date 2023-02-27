@@ -1,9 +1,12 @@
-const Textarea = () => {
-  return (
-    <form action="">
-      <textarea name="textBox" id="textBox" cols="30" rows="10"></textarea>
-    </form>
-  );
-};
+// import Button from "./Button";
 
-export default Textarea;
+// const Textarea = () => {
+//   return (
+//     <form action="">
+//       <textarea name="textBox" id="textBox" cols="30" rows="10"></textarea>
+//       <Button>Convert to link</Button>
+//     </form>
+//   );
+// };
+
+// export default Textarea;
