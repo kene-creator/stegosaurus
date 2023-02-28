@@ -1,5 +1,10 @@
 import Head from "next/head";
-import Textarea from "@/components/utility/Textarea";
+// import TextEditor from "@/components/layout/TextEditor";
+import dynamic from "next/dynamic";
+
+const TextEditor = dynamic(() => import("../components/layout/TextEditor"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -11,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <Textarea></Textarea>
+        <TextEditor></TextEditor>
       </div>
     </>
   );
