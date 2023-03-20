@@ -15,6 +15,10 @@ Run the development server:
 ```bash
 yarn dev
 ```
+
+## Video demo
+[Demo](https://www.loom.com/share/214d4b00323a46a5bae2347e72757adb)
+
 ## Technologies used
 
 ```txt

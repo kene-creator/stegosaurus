@@ -1,6 +1,6 @@
 import { gql, request } from 'graphql-request'
 
-export const findLinks = async (arr) => {
+const findLinks = async (arr) => {
     const GET_LINKS = gql`
         query findLinks($queryObject: [String!]!) {
             findLinks(queryObject: $queryObject) {
@@ -11,8 +11,14 @@ export const findLinks = async (arr) => {
             }
         }
     `
-    const res = await request(process.env.API_URL, GET_LINKS, {
-        queryObject: arr,
-    })
+    const res = await request(
+        'https://3c8e-102-88-62-126.ngrok.io/graphql',
+        GET_LINKS,
+        {
+            queryObject: arr,
+        },
+    )
     return res
 }
+
+export default findLinks

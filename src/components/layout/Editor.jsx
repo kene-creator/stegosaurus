@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Quill from 'quill'
 import DOMPurify from 'dompurify'
 import 'quill/dist/quill.snow.css'
+import findLinks from '../utility/findLinks'
 
 let toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -25,6 +26,10 @@ let toolbarOptions = [
 
 export default function Editor() {
     const quillRef = useRef(null)
+
+    const createLink = (text) => {
+        return `<a href="https://example.com">${text}</a>`
+    }
 
     const wrapperRef = useCallback((wrapper) => {
         if (wrapper === null) return
@@ -69,8 +74,6 @@ export default function Editor() {
         }
     }, [])
 
-    
-
     const handleSelectStrikeThrough = async () => {
         if (quillRef.current) {
             const quill = quillRef.current
@@ -86,7 +89,7 @@ export default function Editor() {
                 return e !== undefined
             })
             const result = await findLinks(wordings)
-            console.log(result)
+
             if (result) {
                 contents.ops.forEach((op) => {
                     if (op.attributes && op.attributes.strike) {
@@ -108,11 +111,7 @@ export default function Editor() {
                         }
                         const linkNode = stringToHTML(sanitizedLink).firstChild
 
-                        if (res.links.length > 1) {
-                            newContents.push({
-                                insert: text,
-                            })
-                        } else {
+                        if (res.links.length === 1) {
                             newContents.push({
                                 attributes: {
                                     link: res.links.length
@@ -121,6 +120,10 @@ export default function Editor() {
                                 },
                                 insert: text,
                                 link: linkNode,
+                            })
+                        } else {
+                            newContents.push({
+                                insert: text,
                             })
                         }
                     } else {
